@@ -82,7 +82,7 @@
     //Ground
     var ground = BABYLON.CreatePlane("ground", { size: 50.0 });
     ground.material = new BABYLON.StandardMaterial("groundMat");
-    ground.material.diffuseTexture = new BABYLON.Texture("/grass.jpeg");
+    ground.material.diffuseTexture = new BABYLON.Texture("https://shubham1001010.github.io/Shrek_game/grass.jpeg");
             ground.material.diffuseTexture.uScale = 20; 
         ground.material.diffuseTexture.vScale = 20; 
     ground.material.diffuseColor = new BABYLON.Color3(0.7, 1.5, 0.7);
@@ -99,26 +99,26 @@
     cube.position = new BABYLON.Vector3(0,-8,22.5);
     // Apply the texture to the cube
     const cubeMaterial = new BABYLON.StandardMaterial("cubeMaterial", scene);
-    cubeMaterial.diffuseTexture = new BABYLON.Texture("/wood1.jpeg", scene);
+    cubeMaterial.diffuseTexture = new BABYLON.Texture("https://shubham1001010.github.io/Shrek_game/wood1.jpeg", scene);
     cubeMaterial.diffuseTexture.uScale = 1.5; 
     cubeMaterial.backFaceCulling = false;
     cubeMaterial.diffuseTexture.vScale = 1.5; 
     cube.material = cubeMaterial;
     
     const cubeMaterial1 = new BABYLON.StandardMaterial("cubeMaterial", scene);
-    cubeMaterial1.diffuseTexture = new BABYLON.Texture("/marble.jpeg", scene);
+    cubeMaterial1.diffuseTexture = new BABYLON.Texture("https://shubham1001010.github.io/Shrek_game/marble.jpeg", scene);
     cubeMaterial1.diffuseTexture.uScale = 2; 
     cubeMaterial1.backFaceCulling = false;
     cubeMaterial1.diffuseTexture.vScale = 2; 
     
     const cubeMaterial2 = new BABYLON.StandardMaterial("cubeMaterial", scene);
-    cubeMaterial2.diffuseTexture = new BABYLON.Texture("/ceiling.jpg", scene);
+    cubeMaterial2.diffuseTexture = new BABYLON.Texture("https://shubham1001010.github.io/Shrek_game/ceiling.jpg", scene);
     cubeMaterial2.diffuseTexture.uScale = 4; 
     cubeMaterial2.backFaceCulling = false;
     cubeMaterial2.diffuseTexture.vScale = 4; 
     
     const cubeMaterial3 = new BABYLON.StandardMaterial("cubeMaterial", scene);
-    cubeMaterial3.diffuseTexture = new BABYLON.Texture("/wall.jpg", scene);
+    cubeMaterial3.diffuseTexture = new BABYLON.Texture("https://shubham1001010.github.io/Shrek_game/wall.jpg", scene);
     cubeMaterial3.diffuseTexture.uScale = 1; 
     cubeMaterial3.backFaceCulling = false;
     cubeMaterial3.diffuseTexture.vScale = 1; 
@@ -191,7 +191,7 @@
     cube13.checkCollisions = true ;
     cube13.material = cubeMaterial;
     
-    BABYLON.SceneLoader.ImportMesh("", "/", "old_bed.glb", scene, function (meshes) {
+    BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "old_bed.glb", scene, function (meshes) {
         // Set the position of the imported model
         meshes.forEach(function (mesh) {
             mesh.position = new BABYLON.Vector3(-21, -11,22);
@@ -200,7 +200,7 @@
         });
     });
     
-        BABYLON.SceneLoader.ImportMesh("", "/", "old_bed.glb", scene, function (meshes) {
+        BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "old_bed.glb", scene, function (meshes) {
         // Set the position of the imported model
         meshes.forEach(function (mesh) {
             mesh.position = new BABYLON.Vector3(-21, -11,16);
@@ -214,7 +214,7 @@
     cube14.checkCollisions = true ;
     cube14.material = cubeMaterial1;
     
-    BABYLON.SceneLoader.ImportMesh("", "/", "toilet.glb", scene, function (meshes, particleSystems, skeletons, animationGroups) {
+    BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "toilet.glb", scene, function (meshes, particleSystems, skeletons, animationGroups) {
                 
                 // Set the position of the first mesh (assuming the entire model is part of this mesh)
                 if (meshes.length > 0) {
@@ -231,7 +231,7 @@
 
             });
             
-          BABYLON.SceneLoader.ImportMesh("", "/", "shrekt.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+          BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "shrekt.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
                 var hero = newMeshes[0];!
                animationGroups[0].stop();
                animationGroups[1].play;
@@ -240,7 +240,7 @@
                 
             });
             
-            BABYLON.SceneLoader.ImportMesh("", "/", "desk.glb", scene, function (meshes) {    
+            BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "desk.glb", scene, function (meshes) {    
         // Set the position of the imported model
         meshes.forEach(function (mesh) {
             mesh.position = new BABYLON.Vector3(-20, -9.5,-7.5);
@@ -249,7 +249,7 @@
         });
     });
         
-        BABYLON.SceneLoader.ImportMesh("", "/", "fan.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+        BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "fan.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
 
                // var hero = newMeshes[0];!
                animationGroups[0].play;
