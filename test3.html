@@ -77,7 +77,7 @@
     light2.intensity = 0.5 ;
 
     // Need a free camera for collisions
-    var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(0, -8, -20));
+    var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(-18, -8, -15));
 
     //Ground
     var ground = BABYLON.CreatePlane("ground", { size: 50.0 });
@@ -283,9 +283,94 @@
     camera.attachControl(canvas, true);
     camera.speed = 2
     BABYLON.Engine.CollisionsEpsilon = 0.0001; // acts as a deadzone for joystick
-    camera.inertia = 0.8
+    camera.inertia = 0.8;
+    var cameraPosition = camera.position;
+    var cameraX = cameraPosition.x;
+    var cameraZ = cameraPosition.z;
+    
+    var days = 1;
+    var position1 = 0;
     
     var gui = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
+var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "Click the button");
+            textButton.color = "white";
+            textButton.fontSize = 24;
+            textButton.background = "rgba(0, 0, 0, 1)";  // Transparent black background
+            textButton.alpha = 0;  // Initially invisible
+            textButton.width = "60%";  // Make it span the full width of the screen
+            textButton.height = "40px";  // Height of the button
+            textButton.paddingBottom = "10px";
+            textButton.thickness = 0;// Add some padding from the bottom
+            textButton.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            textButton.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            textButton.top = "45%";
+            textButton.left = "0%";
+            gui.addControl(textButton);
+
+            // Create the clickable button to change text
+            var jumpButton2 = BABYLON.GUI.Button.CreateSimpleButton("clickButton", "Interact");
+            jumpButton2.width = "100px";
+            jumpButton2.height = "100px";
+            jumpButton2.color = "grey";          // Border color
+            jumpButton2.background = "white";    // Background color
+            jumpButton2.cornerRadius = 100;      // Make the button circular
+            jumpButton2.thickness = 4;           // Border thicknes
+            jumpButton2.textBlock.color = "grey";  // Text color
+            jumpButton2.textBlock.fontFamily = "monospace";  // Monospace font
+            jumpButton2.textBlock.fontWeight = "bold";
+            jumpButton2.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            jumpButton2.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            jumpButton2.left = "-5%";   // 10px from right
+            jumpButton2.top = "-40%"; 
+            gui.addControl(jumpButton2);
+
+            // Click states
+            var clickCount = 0;
+            jumpButton2.onPointerUpObservable.add(function () {
+                clickCount++;
+               console.log(clickCount);
+
+                // First click: Show the first text in green
+                if(days === 1){
+                  
+                if (position1 === "1"){
+                  console.log("mission is successful and position is derived ");
+               
+                
+                if (clickCount === 1) {
+                    textButton.textBlock.text = "I WANT A HOTEL ROOM";
+                    textButton.color = "green";
+                    textButton.alpha = 1;  // Make button visible
+                } 
+                // Second click: Change text to red
+                else if (clickCount === 2) {
+                    textButton.textBlock.text = "SURE THERE IS A ROOM LAST IN LOBBY YOU CAN TAKE THAT";
+                    textButton.color = "red";
+                } 
+                // Third click: Change text back to green
+                else if (clickCount === 3) {
+                    textButton.textBlock.text = "THANK YOU I WILL LIVE THERE FOR FIVE DAYS";
+                    textButton.color = "green";
+                } 
+                // Fourth click: Hide the button again
+                else if (clickCount === 4){
+                    //textButton.alpha = 0;  // Make button invisible
+                  //  clickCount = 4;  // Reset click count
+                    textButton.textBlock.text = "I SAID GO TO YOUR ROOM OR I HAVE TO DO SOMETHING.";
+                    textButton.color = "red";
+                }
+                else if (clickCount === 5){
+                    textButton.alpha = 0;  // Make button invisible
+                    clickCount = 6;  // Reset click count
+                }
+                }
+                }
+              
+            });
+            
+            
+    var gui2 = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
 
 
@@ -304,7 +389,9 @@
             jumpButton.left = "-5%";   // 10px from right
             jumpButton.top = "-20%";    // 10px from bottom
 
-            gui.addControl(jumpButton);
+            gui2.addControl(jumpButton);
+            
+           
             
             var isJumping = false;
             var jumpHeight = 1.5;
@@ -319,6 +406,56 @@
                 }
             });
             
+           var jumpButton3 = BABYLON.GUI.Button.CreateSimpleButton("jumpButton", "sleep");
+
+            jumpButton3.width = "100px";
+
+            jumpButton3.height = "100px";
+            jumpButton3.color = "grey";          // Border color
+            jumpButton3.background = "white";    // Background color
+            jumpButton3.cornerRadius = 100;      // Make the button circular
+            jumpButton3.thickness = 4;           // Border thicknes
+            jumpButton3.textBlock.color = "grey";  // Text color
+            jumpButton3.textBlock.fontFamily = "monospace";  // Monospace font
+            jumpButton3.textBlock.fontWeight = "bold";
+            jumpButton3.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            jumpButton3.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+            jumpButton3.left = "-17%";   // 10px from right
+            jumpButton3.top = "-27%";    // 10px from bottom
+
+            gui2.addControl(jumpButton3);
+            
+            jumpButton3.onPointerUpObservable.add(function () {
+              if (days=1){
+              if (position1===2){
+                
+            var jumpButton4 = BABYLON.GUI.Button.CreateSimpleButton("clickButton", "NIGHT 2");
+            jumpButton4.width = "100%";
+            jumpButton4.height = "100%";        // Border color
+            jumpButton4.background = "black";    // Background color 
+            jumpButton4.textBlock.color = "white";  // Text color
+            jumpButton4.textBlock.fontFamily = "monospace";  // Monospace font
+            jumpButton4.textBlock.fontWeight = "bold";
+            jumpButton4.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            jumpButton4.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+            gui.addControl(jumpButton4);
+            days= 2;
+            
+            function executeAfterDelay8() {
+            console.log("This function is executed after 1500ms!");
+            jumpButton4.alpha = 0;
+            gui.removeControl(jumpButton4);
+            camera.position.x = -18;
+            camera.position.z =-15;
+            }
+            // Execute the function after 1500 milliseconds (1.5 seconds)
+            setTimeout(executeAfterDelay8, 1500);
+                }
+                
+              }
+              
+            });
+            
             scene.onBeforeRenderObservable.add(function() {
                 if (isJumping) {
                     camera.position.y += velocityY;
@@ -330,8 +467,26 @@
                         isJumping = false;
                     }
                 }
-            })
-;
+            });
+            
+            function positioncheck(){
+              
+              if ((camera.position.x >= -23 && camera.position.x <= -13) && (camera.position.z >= -14 && camera.position.z <= -4)) {
+            position1 = "1";
+            //console.log(camera.position.x,camera.position.z, position1);
+          //  console.log("area reached");
+              }
+              else if ((camera.position.x >= -27 && camera.position.x <= -15) && (camera.position.z >= 16 && camera.position.z <= 28)){
+                position1 = 2 ;
+              }
+              else {
+                position1 ="0";
+               // console.log(camera.position.x,camera.position.z);
+              }
+            }
+            
+            setInterval(positioncheck, 100);
+
 
 
             // Function for jump
