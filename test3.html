@@ -125,6 +125,39 @@
     // Enable collision for the cube
     cube.checkCollisions = true;
     
+    const cubeMaterial4 = new BABYLON.StandardMaterial("cubeMaterial", scene);
+    
+            
+            BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "shrekt.glb", scene, function (meshes, particleSystems, skeletons, animationGroups) {
+    // Position the imported mesh
+    var importedMesh = meshes[0];
+    importedMesh.rotation = new BABYLON.Vector3(0,0,0);
+    // Assuming the first mesh is the one you want
+    importedMesh.position = new BABYLON.Vector3(-20, -10, -6.5);
+    meshes[0].diffuse = new BABYLON.Vector3(1,0,0);
+
+    // Play the specific animation group (4th animation group)
+    if (animationGroups.length > 4) {
+        const animationGroup = animationGroups[4]; // Index 3 for the 4th group (0-based index)
+        animationGroup.start(true); // true to loop
+    }
+    var redLight = new BABYLON.DirectionalLight("redLight", new BABYLON.Vector3(0, 10, 0), new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 10, scene);
+redLight.diffuse = new BABYLON.Color3(1, 0, 0);
+redLight.specular = new BABYLON.Color3(1, 0, 0);
+redLight.parent = importedMesh;
+redLight.intensity = 20;
+redLight.includedOnlyMeshes.push(meshes[0]);
+
+});
+
+
+      // Add linear fog to the scene
+// Add exponential squared fog to the scene (density increases with distance)
+scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
+scene.fogDensity = 0.05; // Adjust for the exponential growth rate of the fog density
+scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.85); // Fog color (light grayish)
+
+      //
     
     const cube1 = BABYLON.MeshBuilder.CreateBox("cube", {height: 4 , width : 0.25 , depth : 45}, scene);
     cube1.position = new BABYLON.Vector3(22.5,-8,0);
@@ -186,6 +219,12 @@
     cube12.checkCollisions = true ;
     cube12.material = cubeMaterial;
     
+    const cube15 = BABYLON.MeshBuilder.CreateBox("cube", {height: 4 , width : 0.25 , depth : 6}, scene);
+    cube15.position = new BABYLON.Vector3(-13,-8,13.5);
+    cube15.checkCollisions = true ;
+    cube15.material = cubeMaterial4;
+    cube15.material.alpha = 0;
+    
     const cube13 = BABYLON.MeshBuilder.CreateBox("cube", {height: 4 , width : 0.25 , depth : 38}, scene);
     cube13.position = new BABYLON.Vector3(-5.5,-8,3.5);
     cube13.checkCollisions = true ;
@@ -231,14 +270,9 @@
 
             });
             
-          BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "shrekt.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
-                var hero = newMeshes[0];!
-               animationGroups[0].stop();
-               animationGroups[1].play;
-              hero.position = new BABYLON.Vector3(-20, -10, -6.5);
-              //hero.checkCollisions = true;
-                
-            });
+          
+            
+            
             
             BABYLON.SceneLoader.ImportMesh("", "https://shubham1001010.github.io/Shrek_game/", "desk.glb", scene, function (meshes) {    
         // Set the position of the imported model
@@ -290,16 +324,19 @@
     
     var days = 1;
     var position1 = 0;
+   var day1e = 0 ;
+   var dumpe = 0;
+   var int1=0;
     
     var gui = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "Click the button");
+var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "");
             textButton.color = "white";
             textButton.fontSize = 24;
-            textButton.background = "rgba(0, 0, 0, 1)";  // Transparent black background
+            textButton.background = "rgba(0, 0, 0, 0)";  // Transparent black background
             textButton.alpha = 0;  // Initially invisible
             textButton.width = "60%";  // Make it span the full width of the screen
-            textButton.height = "40px";  // Height of the button
+            textButton.height = "14%";  // Height of the button
             textButton.paddingBottom = "10px";
             textButton.thickness = 0;// Add some padding from the bottom
             textButton.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
@@ -328,37 +365,39 @@ var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "Click the 
             // Click states
             var clickCount = 0;
             jumpButton2.onPointerUpObservable.add(function () {
-                clickCount++;
-               console.log(clickCount);
+                
 
                 // First click: Show the first text in green
                 if(days === 1){
                   
-                if (position1 === "1"){
+                if (position1 === 1){
                   console.log("mission is successful and position is derived ");
                
+               clickCount++;
+               console.log(clickCount);
                 
                 if (clickCount === 1) {
-                    textButton.textBlock.text = "I WANT A HOTEL ROOM";
-                    textButton.color = "green";
+                    textButton.textBlock.text = "YOU : I WANT A HOTEL ROOM";
+                   // textButton.color = "green";
                     textButton.alpha = 1;  // Make button visible
                 } 
                 // Second click: Change text to red
                 else if (clickCount === 2) {
-                    textButton.textBlock.text = "SURE THERE IS A ROOM LAST IN LOBBY YOU CAN TAKE THAT";
-                    textButton.color = "red";
+                    textButton.textBlock.text = "SHREK : SURE THERE IS A ROOM LAST IN LOBBY YOU CAN TAKE THAT";
+                    //textButton.color = "red";
                 } 
                 // Third click: Change text back to green
                 else if (clickCount === 3) {
-                    textButton.textBlock.text = "THANK YOU I WILL LIVE THERE FOR FIVE DAYS";
-                    textButton.color = "green";
+                    textButton.textBlock.text = "YOU : THANK YOU I WILL LIVE THERE FOR FIVE DAYS";
+                   // textButton.color = "green";
                 } 
                 // Fourth click: Hide the button again
                 else if (clickCount === 4){
                     //textButton.alpha = 0;  // Make button invisible
                   //  clickCount = 4;  // Reset click count
-                    textButton.textBlock.text = "I SAID GO TO YOUR ROOM OR I HAVE TO DO SOMETHING.";
-                    textButton.color = "red";
+                    textButton.textBlock.text = "SHREK : I SAID GO TO YOUR ROOM OR I HAVE TO DO SOMETHING.";
+                    int1 = 1;
+                    //textButton.color = "red";
                 }
                 else if (clickCount === 5){
                     textButton.alpha = 0;  // Make button invisible
@@ -366,8 +405,45 @@ var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "Click the 
                 }
                 }
                 }
+                else if(days === 2){
+                  console.log("stage1");
+                  if (position1 === 1){
+                    console.log("stage2");
+                    clickCount++;
+                    if (clickCount === 1) {
+                      console.log("stage3");
+                    textButton.textBlock.text = "YOU : HI SHREK";
+                   // textButton.color = "green";
+                    textButton.alpha = 1;  // Make button visible
+                } 
+                // Second click: Change text to red
+                else if (clickCount === 2) {
+                    textButton.textBlock.text = "SHREK : OOH YOU MAD BOY, YOU DUMP IN MY TOILET AND MADE IT DIRTY. GO AND CLEAN IT.";
+                    //textButton.color = "red";
+                } 
+                // Third click: Change text back to green
+                else if (clickCount === 3) {
+                    textButton.textBlock.text = "YOU : IT IS NOT MY RESPONSIBILITY ";
+                   // textButton.color = "green";
+                } 
+                // Fourth click: Hide the button again
+                else if (clickCount === 4){
+                    //textButton.alpha = 0;  // Make button invisible
+                  //  clickCount = 4;  // Reset click count
+                    textButton.textBlock.text = "SHREK : I SAID GO AND DO IT.";
+                    //textButton.color = "red";
+                }
+                else if (clickCount === 5){
+                  textButton.textBlock.text = "GO TO TOILET AND TAKE BROOM AND CLEAN IT";
+                    clickCount = 6;  // Reset click count
+                }
+                    
+                    
+                  }
+                }
               
             });
+            
             
             
     var gui2 = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
@@ -428,7 +504,8 @@ var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "Click the 
             jumpButton3.onPointerUpObservable.add(function () {
               if (days=1){
               if (position1===2){
-                
+                if (int1 === 1){
+                if (day1e === 1){
             var jumpButton4 = BABYLON.GUI.Button.CreateSimpleButton("clickButton", "NIGHT 2");
             jumpButton4.width = "100%";
             jumpButton4.height = "100%";        // Border color
@@ -440,18 +517,51 @@ var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "Click the 
             jumpButton4.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
             gui.addControl(jumpButton4);
             days= 2;
+            clickCount = 0;
+            console.log(days, clickCount);
             
             function executeAfterDelay8() {
             console.log("This function is executed after 1500ms!");
             jumpButton4.alpha = 0;
             gui.removeControl(jumpButton4);
             camera.position.x = -18;
-            camera.position.z =-15;
+            camera.position.z =-14;
             }
             // Execute the function after 1500 milliseconds (1.5 seconds)
             setTimeout(executeAfterDelay8, 1500);
                 }
+                else if(day1e===0){
+                  textButton.textBlock.text = "I NEED TO DUMP BEFORE I SLEEP";
+                  dumpe = 1;
+                  textButton.alpha = 1;
+                }
                 
+                else{
+                  console.log(day1e);
+                }
+                }
+                
+                else if (int1=== 0){
+                  camera.position.x = -12;
+                    camera.position.z =20;
+                    textButton.textBlock.text = "THIS ROOM IS NOT YOURS . TALK TO SHREK TO BOOK IT.";
+                    textButton.alpha = 1;
+                }
+                
+              }
+                  else  if (position1=== 3){
+                  if ( dumpe ===1){
+                    camera.position.x = -14;
+                    camera.position.z =-18;
+                    day1e = 1;
+                    textButton.textBlock.text = "AAH FEELING BETTER!";
+                    
+                    function txtap1(){
+                    textButton.alpha = 0;
+                    }
+                    setTimeout(txtap1,1500,1);
+                  }
+                  }
               }
               
             });
@@ -472,15 +582,22 @@ var textButton = BABYLON.GUI.Button.CreateSimpleButton("textButton", "Click the 
             function positioncheck(){
               
               if ((camera.position.x >= -23 && camera.position.x <= -13) && (camera.position.z >= -14 && camera.position.z <= -4)) {
-            position1 = "1";
+            position1 = 1;
+            jumpButton3.textBlock.text = "----";
             //console.log(camera.position.x,camera.position.z, position1);
           //  console.log("area reached");
               }
               else if ((camera.position.x >= -27 && camera.position.x <= -15) && (camera.position.z >= 16 && camera.position.z <= 28)){
                 position1 = 2 ;
+                jumpButton3.textBlock.text = "SLEEP";
+              }
+              else if ((camera.position.x >= -25 && camera.position.x <= -15) && (camera.position.z >= -25 && camera.position.z <= -16)){
+                position1 = 3 ;
+                jumpButton3.textBlock.text = "DUMP";
               }
               else {
-                position1 ="0";
+                position1 =0;
+                jumpButton3.textBlock.text = "----";
                // console.log(camera.position.x,camera.position.z);
               }
             }
@@ -501,8 +618,8 @@ class FreeCameraTouchVirtualJoystickInput extends BABYLON.BaseCameraPointersInpu
     JOYSTICK_TOUCH_AREA_HORIZONTAL_SCREEN_SHARE = 0.5;
     JOYSTICK_CIRCLE_SIZE_VERTICAL_SCREEN_SHARE = 0.1;
     JOYSTICK_PUCK_SIZE_VERTICAL_SCREEN_SHARE = 0.05;
-    JOYSTICK_OUTER_CIRCLE_THICKNESS_RATIO = 0.01;
-    JOYSTICK_INNER_CIRCLE_THICKNESS_RATIO = 0.04;
+    JOYSTICK_OUTER_CIRCLE_THICKNESS_RATIO = 0.005;
+    JOYSTICK_INNER_CIRCLE_THICKNESS_RATIO = 0.02;
     JOYSTICK_PUCK_THICKNESS_RATIO = 0.01;
 
     camera;
@@ -598,12 +715,34 @@ class FreeCameraTouchVirtualJoystickInput extends BABYLON.BaseCameraPointersInpu
         return new BABYLON.Vector2(engine.getRenderWidth(), engine.getRenderHeight());
     }
 
+
     checkInputs() {
         let joystickMoveVector = new BABYLON.Vector3(this.joystickDelta.x, 0, -this.joystickDelta.y);
-        joystickMoveVector.scaleInPlace(BABYLON.EngineStore.LastCreatedEngine.getDeltaTime() / 1000);
+        joystickMoveVector.scaleInPlace(BABYLON.EngineStore.LastCreatedEngine.getDeltaTime() / 3000);
+        
+        
+var movement = joystickMoveVector.length();
+    if (movement > 0) {
+        // Add a slight shake to the camera position
+        let shakeAmount = 0.05; // Adjust the intensity of the shake
+        let shakeX = Math.random() * shakeAmount - shakeAmount / 2;
+        let shakeY = Math.random() * shakeAmount - shakeAmount / 2;
+
+        this.camera.position.addInPlace(new BABYLON.Vector3(shakeX, shakeY, 0));
+        
+
+
+       // walkingSound.play();
+    }
+    
+    else if (movement===0){
+     // walkingSound.stop();
+      
+    }
         this.camera.cameraDirection.addInPlace(
             BABYLON.Vector3.TransformCoordinates(joystickMoveVector, BABYLON.Matrix.RotationY(this.camera.rotation.y)),
         );
+
     }
 
     onTouch(point, offsetX, offsetY) {
@@ -612,10 +751,22 @@ class FreeCameraTouchVirtualJoystickInput extends BABYLON.BaseCameraPointersInpu
             this.onTouchJoystick(
                 new BABYLON.Vector2(point.x, point.y).subtractInPlace(this.joystickButtonDownPosOffset),
             );
+            
         } else {
             this.onTouchSwipe(new BABYLON.Vector2(offsetX, offsetY));
         }
     }
+    
+    onTouch(point, offsetX, offsetY) {
+    if (point.pointerId === this.joystickPointerId || point.x < this.screenSize.x * this.JOYSTICK_TOUCH_AREA_HORIZONTAL_SCREEN_SHARE) {
+        // Joystick movement
+        this.onTouchJoystick(new BABYLON.Vector2(point.x, point.y).subtractInPlace(this.joystickButtonDownPosOffset));
+    } else {
+        // Swipe to rotate
+        this.onTouchSwipe(new BABYLON.Vector2(offsetX, offsetY));
+    }
+}
+
 
     onTouchJoystick(touchPoint) {
         const joystickVector = touchPoint.subtract(this.joystickButtonDownPos);
@@ -662,7 +813,10 @@ class FreeCameraTouchVirtualJoystickInput extends BABYLON.BaseCameraPointersInpu
         this.joystickDelta.scaleInPlace(0);
         this.joystickContainer.isVisible = false;
     }
+    
 }
+
+
 
                 window.initFunction = async function() {
                     
